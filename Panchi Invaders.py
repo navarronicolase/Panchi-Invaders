@@ -54,13 +54,18 @@ fuente = pygame.font.Font('m04.TTF', 32)
 text_x = 10
 text_y = 10
 
+#EndGame
+fuente_end = pygame.font.Font('game_over.ttf', 150)
+
+def text_end():
+    mi_fuente_end = fuente_end.render('GAME OVER', True, (255, 0, 0))
+    pantalla.blit(mi_fuente_end, (200, 200))
+
 #Funcion Score
 def mostrar_score(x, y):
     text = fuente.render(f'Score: {score}', True, (255, 255, 0))
     pantalla.blit(text, (x, y))
 
-
-#Mostrar score
 #Funcion jugador
 def jugador(x, y):
     pantalla.blit(img_jugador, (x, y))
@@ -125,6 +130,13 @@ while se_ejecuta:
 
     # Modificar ubicacion enemiga
     for e in range(cantidad_enemigos):
+
+        if enemigo_y[e]> 536:
+            for k in range(cantidad_enemigos):
+                enemigo_y[k] = 1000
+            text_end()
+            break
+
         enemigo_x[e] += enemigo_x_cambio[e]
 
     # Mantener dentro de bordes enemigo
